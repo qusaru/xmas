@@ -3,22 +3,83 @@
 	<head>
 		<link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAYdEVYdFNvZnR3YXJlAHBhaW50Lm5ldCA0LjAuNWWFMmUAAACISURBVDhPjYzbDYRADAOp5Dqgqm3virjODEbk5HgTlo+R8hh7A9Dy+QJEb05axhggnCOsJfoPpjDxcKDOYwF3D1cOaQuIhknllAUqrP6vpO5O/kPgsuN+WkgVUtxPSyd3d7IMr/6lEDfsP1w8OH1BhKVkck7qAg/fJMcLSHp6gf9vUsGEhGuwHXh1q5Vz3tlWAAAAAElFTkSuQmCC" rel="icon"></link>
 		<style>
-			body
+			#BODY
 			{
 				font-family: Lucida Sans Unicode;
+				height: 100%;
+				left: 0;
+				margin: 0;
+				padding: 0;
+				position: absolute;
+				top: 0;
+				width: 100%;
+			}
+
+			#CANVAS
+			{
+				background: #fee;
+				height: 100%;
+				left: 0;
+				margin: 0;
+				padding: 0;
+				position: absolute;
+				top: 0;
+				width: 100%;
 			}
 		</style>
 		<title>mas</title>
 	</head>
-	<body>
+	<body id="BODY">
 		<canvas id="CANVAS">Install the <a href="https://www.chrome.google.com">browser</a></canvas>
 		<script>
+			var window = window;
+			var canvas = window.document.getElementById('CANVAS');
+			var context = canvas.getContext('2d');
+
 			var game =
+			{
+				classes:
 				{
-					draw: function()
+					unit: function(name)
 					{
+						var unit =
+						{
+							name: name,
+							pos:
+							{
+								get x()
+								{
+									return Math.random();
+								}
+							}
+						};
+						return unit;
 					}
-				};
+				},
+
+				draw: function()
+				{
+				},
+
+				update:
+				{
+					canvas: function(canvas, window)
+					{
+						canvas.height = window.innerHeight;
+						canvas.width = window.innerWidth;
+					}
+				}
+			};
+
+			window.onload = function()
+			{
+				game.update.canvas(canvas, window);
+			};
+
+			window.onresize = function()
+			{
+				game.update.canvas(canvas, window);
+			};
 		</script>
 	</body>
 </html>
